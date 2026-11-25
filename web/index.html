@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Quorum: do insider cluster buys beat the market?</title>
+<meta name="description" content="A test of 3,355 SEC Form 4 insider cluster buys from 2018 to 2023. The honest answer is on the page.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f3ecdd'/%3E%3Ccircle cx='9' cy='16' r='4' fill='%23c8402a'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23c8402a'/%3E%3Ccircle cx='23' cy='16' r='4' fill='%23c8402a'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#result">Skip to the result</a>
+<header class="top">
+  <a class="mark" href="#top" aria-label="Quorum"><span class="dots"><i></i><i></i><i></i></span>Quorum</a>
+  <nav aria-label="Sections"><a href="#result">Result</a><a href="#cuts">Cuts</a><a href="#ledger">Ledger</a><a href="#limits">Limits</a></nav>
+</header>
+<main id="top">
+  <section class="hero">
+    <p class="kicker">An event study of SEC Form 4 filings, 2018 to 2023</p>
+    <h1 id="headline">Do insider cluster buys beat the market?</h1>
+    <p class="lede" id="lede">Loading the numbers.</p>
+    <dl class="figs" id="figs" aria-label="Headline numbers"></dl>
+  </section>
+
+  <section id="result" class="block">
+    <div class="head"><h2>What happened after the third insider bought</h2>
+      <div class="seg" role="group" aria-label="Series to show">
+        <button data-s="cluster" aria-pressed="true">Cluster buys</button>
+        <button data-s="solo" aria-pressed="false">Single insider</button>
+        <button data-s="both" aria-pressed="false">Both</button>
+      </div></div>
+    <p class="note">Average return of the stock minus the S&amp;P 500 (SPY), counted in trading days from the first close after the filing. The shaded band is a 95% bootstrap interval for the average. Zero is the market.</p>
+    <figure class="chart"><div class="scroll"><svg id="path" viewBox="0 0 900 380" role="img" aria-labelledby="pathcap"></svg></div>
+      <figcaption id="pathcap"></figcaption></figure>
+    <div class="tablewrap"><table id="hz"><caption class="sr">Average excess return by holding period</caption></table></div>
+  </section>
+
+  <section id="cuts" class="block">
+    <h2>Cut it four ways, nothing sticks</h2>
+    <p class="note">Each bar is the average 63-trading-day excess return of a subgroup of cluster buys. The whisker is a 95% interval. Wherever the whisker crosses zero, the data cannot tell the subgroup from the market.</p>
+    <div class="grid2">
+      <figure><figcaption>By year</figcaption><svg id="by_year" viewBox="0 0 440 260" role="img" aria-label="Average excess return by year"></svg></figure>
+      <figure><figcaption>By total dollars bought</figcaption><svg id="by_size" viewBox="0 0 440 260" role="img" aria-label="Average excess return by purchase size"></svg></figure>
+      <figure><figcaption>By number of insiders</figcaption><svg id="by_insiders" viewBox="0 0 440 260" role="img" aria-label="Average excess return by number of insiders"></svg></figure>
+      <figure><figcaption>Stock already down, or not</figcaption><svg id="by_momentum" viewBox="0 0 440 260" role="img" aria-label="Average excess return by prior three month move"></svg></figure>
+    </div>
+    <figure class="wide"><figcaption>The spread behind the average: 63-day excess return of every cluster buy</figcaption><svg id="hist" viewBox="0 0 900 260" role="img" aria-label="Histogram of excess returns"></svg></figure>
+  </section>
+
+  <section id="ledger" class="block">
+    <div class="head"><h2>The sixty biggest cluster buys</h2>
+      <label class="find">Filter <input id="q" type="search" placeholder="ticker or name" autocomplete="off"></label></div>
+    <p class="note">Ranked by total dollars bought in the 30-day window. Click a column to sort. Excess return is 63 trading days after entry, against SPY.</p>
+    <div class="tablewrap"><table id="tbl"><thead><tr>
+      <th><button data-k="sym">Ticker</button></th><th><button data-k="name">Company</button></th><th><button data-k="date">Signal date</button></th>
+      <th class="num"><button data-k="insiders">Insiders</button></th><th class="num"><button data-k="value">Bought</button></th><th class="num"><button data-k="x63">63-day excess</button></th>
+    </tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section id="limits" class="block">
+    <h2>Where this can mislead you</h2>
+    <ol class="limits" id="limitlist"></ol>
+    <h3>Method in six lines</h3>
+    <ol class="method">
+      <li>Source: the SEC Insider Transactions Data Sets (Form 4), 24 quarters from 2018 Q1 to 2023 Q4. Open-market purchases (code P) of common stock by directors and officers, price at least $1. A joint filing that lists several related owners counts as one insider, and trades over $250 million are dropped as filing typos.</li>
+      <li>A cluster is three or more different insiders of one company buying within 30 days, at least $50,000 in total. The signal date is the filing date of the buy that completes it. Ninety days of quiet before the next signal at the same company.</li>
+      <li>Entry is the first close after the filing date, so no trade uses information from before it was public. Exit is 21, 63 or 126 trading days later. Prices are adjusted closes from Yahoo Finance.</li>
+      <li>Excess return is the stock's return minus SPY over the same dates. The IWM column in the table uses the small-cap index instead.</li>
+      <li>Single-insider events ($50,000 or more by one person) are a random sample of 3,500, used as a control.</li>
+      <li>Intervals are 4,000 bootstrap resamples of events. Events overlap in time, so the true uncertainty is wider than shown.</li>
+    </ol>
+    <p class="src">Code and data scripts: <a href="https://github.com/Aditya2375/quorum">github.com/Aditya2375/quorum</a>. MIT licence. Not investment advice.</p>
+  </section>
+</main>
+<footer><span>Quorum</span><span>Data: SEC EDGAR, Yahoo Finance. Fonts: Instrument Serif, IBM Plex Mono (SIL OFL).</span></footer>
+<script src="js/app.js"></script>
+</body>
+</html>

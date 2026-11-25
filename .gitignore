@@ -1,0 +1,8 @@
+data/*.zip
+data/px/
+data/purchases.csv
+data/results.csv
+data/events*.csv
+data/*.log
+data/dl.done
+node_modules

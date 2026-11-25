@@ -11,8 +11,8 @@ Live: https://aditya2375.github.io/quorum/
 1. `train/extract.py` reads the SEC Insider Transactions Data Sets (24 quarterly zips, not committed, download from sec.gov) and keeps open-market purchases (code P) of common stock by directors and officers. A joint filing with several related owners counts as one insider. Trades over $250 million are dropped as typos.
 2. `train/events.py` marks a cluster: three or more different insiders buying within 30 days, $50,000 or more in total, signalled on the filing date of the completing buy, with 90 quiet days before the next signal at that company. Single-insider events are the control.
 3. `train/prices.py` downloads daily adjusted closes from Yahoo Finance for every event ticker plus SPY and IWM.
-4. `train/study.py` enters at the first close after the filing date, exits 21, 63 or 126 trading days later, subtracts SPY over the same dates, and bootstraps 95% intervals. It writes `web/data/study.json`.
-5. `web/` is a static page, no build step, no third-party requests.
+4. `train/study.py` enters at the first close after the filing date, exits 21, 63 or 126 trading days later, subtracts SPY over the same dates, and bootstraps 95% intervals. It writes `docs/data/study.json (copied from data/study.json)`.
+5. `docs/` is a static page, no build step, no third-party requests.
 
 ## Limits, stated up front
 
@@ -28,9 +28,9 @@ Not investment advice.
 
 ```
 python train/extract.py && python train/events.py && python train/prices.py && python train/study.py
-python -m http.server -d web
+python -m http.server -d docs
 ```
 
 ## Licence
 
-MIT. Fonts: Instrument Serif and IBM Plex Mono, SIL Open Font License (files in `web/fonts`).
+MIT. Fonts: Instrument Serif and IBM Plex Mono, SIL Open Font License (files in `docs/fonts`).
